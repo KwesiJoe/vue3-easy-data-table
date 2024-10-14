@@ -255,7 +255,10 @@
           :rows-items="rowsItemsComputed"
         />
       </div>
-      <div class="pagination__items-index">
+      <div 
+        v-if="!hideItemsIndex"
+        class="pagination__items-index"
+      >
         {{ `${currentPageFirstIndex}–${currentPageLastIndex}` }}
         {{ rowsOfPageSeparatorMessage }} {{ totalItemsLength }}
       </div>

@@ -63,6 +63,10 @@ export default {
     type: Boolean,
     default: false,
   },
+  hideItemsIndex: {
+    type: Boolean,
+    default: false,
+  },
   hideRowsPerPage: {
     type: Boolean,
     default: false,
