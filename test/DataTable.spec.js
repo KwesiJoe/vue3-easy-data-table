@@ -17,7 +17,7 @@ describe('Button Pagination', () => {
         rowsPerPage: 5,
       },
     });
-    expect(wrapper.find('.data-table').exists()).toBe(true);
+    expect(wrapper.find('.vue3-easy-data-table').exists()).toBe(true);
   });
 
   /**
@@ -76,7 +76,7 @@ describe('Button Pagination', () => {
 
 // Multiple selecting
 describe('Multiple selecting', () => {
-  it('Gather data of the the top two row items', async () => {
+  it('Gather data of the top two row items', async () => {
     const mockItems = mockClientItems(200);
     const wrapper = mount(DataTable, {
       props: {
@@ -86,9 +86,9 @@ describe('Multiple selecting', () => {
         rowsPerPage: 5,
       },
     });
-    const singleCheckboxArr = wrapper.findAll('.single-select__checkbox');
-    const firstSingleCheckbox = singleCheckboxArr.at(0);
-    const secondSingleCheckbox = singleCheckboxArr.at(1);
+    const singleCheckboxArr = wrapper.findAll('.easy-checkbox');
+    const firstSingleCheckbox = singleCheckboxArr.at(1);
+    const secondSingleCheckbox = singleCheckboxArr.at(2);
     await firstSingleCheckbox.trigger('click');
     await secondSingleCheckbox.trigger('click');
     const updateItemsSelecedEvent = wrapper.emitted('update:itemsSelected');
@@ -106,18 +106,20 @@ describe('Multiple selecting', () => {
         rowsPerPage: 5,
       },
     });
-    const singleCheckboxArr = wrapper.findAll('.single-select__checkbox');
-    const firstSingleCheckbox = singleCheckboxArr.at(0);
+    const singleCheckboxArr = wrapper.findAll('.easy-checkbox');
+    const firstSingleCheckbox = singleCheckboxArr.at(1);
     await firstSingleCheckbox.trigger('click');
 
     const nextPageButton = wrapper.find('.next-page__click-button');
     await nextPageButton.trigger('click');
 
-    const singleCheckboxArrInSecondPage = wrapper.findAll('.single-select__checkbox');
-    const firstSingleCheckboxInSecondPage = singleCheckboxArrInSecondPage.at(0);
+    const singleCheckboxArrInSecondPage = wrapper.findAll('.easy-checkbox');
+    const firstSingleCheckboxInSecondPage = singleCheckboxArrInSecondPage.at(1);
     await firstSingleCheckboxInSecondPage.trigger('click');
 
     const updateItemsSelecedEvent = wrapper.emitted('update:itemsSelected');
+    console.log(updateItemsSelecedEvent[1]);
+    
     expect(updateItemsSelecedEvent).toHaveLength(2);
     expect(updateItemsSelecedEvent[1]).toEqual([[mockItems[5], mockItems[0]]]);
   });
